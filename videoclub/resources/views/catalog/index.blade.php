@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="row">
-		@foreach( $arrayPeliculas as $key => $pelicula )
+		@foreach( $arrayPeliculas as $pelicula )
 		<div class="col-xs-5 col-sm-4 col-md-3 text-center">
 
 			<a href="{{ url('/catalog/show',$pelicula->id ) }}">
