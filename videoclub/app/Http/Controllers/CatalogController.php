@@ -33,27 +33,29 @@ class CatalogController extends Controller
     }
 
     function postCreate(Request $request){   
-        $validatedData = $request->validate([
+        $validarDatos = $request->validate([
             'year' => 'required|numeric',
             'title' => 'required|string',
             'director' => 'required|string',
             'poster' => 'required',
             'synopsis' => 'required'
         ]);
-        $id = Movie::create($validatedData);   
+        $id = Movie::create($validarDatos); 
+        session()->flash('notif', 'La película se ha insertado correctamente.');  
         return redirect('catalog');
     }
 
     function putEdit(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'year' => 'required',
-            'title' => 'required',
-            'director' => 'required',
+        $validarDatos = $request->validate([
+            'year' => 'required|numeric',
+            'title' => 'required|string',
+            'director' => 'required|string',
             'poster' => 'required',
             'synopsis' => 'required'
         ]);
-        Movie::whereId($id)->update($validatedData);
+        Movie::whereId($id)->update($validarDatos);
+        session()->flash('notif', 'La película se ha guardado/modificado correctamente.');
         return redirect('catalog/show/'.$id);
     }
 }

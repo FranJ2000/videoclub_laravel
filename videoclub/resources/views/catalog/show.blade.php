@@ -1,6 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
+	@if(session()->has('notif'))
+		<div class="row">
+			<div class="alert alert-success">
+				<button type="button" class="close pl-2" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Notificación: </strong> {{ session()->get('notif')}}
+			</div>
+		</div>
+	@endif
+
 	<div class="row">
 		<div class="col-sm-4">
 			<img src="{{ $id->poster }}" style="height:280px"/>
