@@ -17,30 +17,45 @@
 
 	            	<div class="form-group">
 	            	   <label for="title">Título</label>
-	            	   <input type="text" name="title" id="title" class="form-control" value="{{$id->title}}">
+	            	   <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
+						@error('title')
+	            			<div class="text-danger">{{$message}}</div>
+	            	   	@enderror
 	            	</div>
 
 	            	<div class="form-group">
 	            	   {{-- TODO: Completa el input para el año --}}
 	            	   <label for="year">Año</label>
-	            	   <input type="text" name="year" id="year" class="form-control" value="{{$id->year}}">
+	            	   <input type="text" name="year" id="year" class="form-control @error('year') is-invalid @enderror">
+	            	   @error('year')
+	            			<div class="text-danger">{{$message}}</div>
+	            	   	@enderror
 	            	</div>
 
 	            	<div class="form-group">
 	            	   {{-- TODO: Completa el input para el director --}}
 	            	   <label for="director">Director</label>
-	            	   <input type="text" name="director" id="director" class="form-control"value="{{$id->director}}">
+	            	   <input type="text" name="director" id="director" class="form-control @error('director') is-invalid @enderror">
+	            	   @error('director')
+	            			<div class="text-danger">{{$message}}</div>
+	            	   	@enderror
 	            	</div>
 
 	            	<div class="form-group">
 	            	   {{-- TODO: Completa el input para el poster --}}
 	            	   <label for="poster">Poster</label>
-	            	   <input type="text" name="poster" id="poster" class="form-control" value="{{$id->poster}}">
+	            	   <input type="text" name="poster" id="poster" class="form-control @error('poster') is-invalid @enderror">
+	            	   @error('poster')
+	            			<div class="text-danger">{{$message}}</div>
+	            	   	@enderror
 	            	</div>
 
 	            	<div class="form-group">
 	            	   <label for="synopsis">Resumen</label>
-	            	   <textarea name="synopsis" id="synopsis" class="form-control" rows="3">{{$id->synopsis}}</textarea>
+	            	   <textarea name="synopsis" id="synopsis" class="form-control @error('synopsis') is-invalid @enderror" rows="3"></textarea>
+	            	   @error('synopsis')
+	            			<div class="text-danger">{{$message}}</div>
+	            	   	@enderror
 	            	</div>
 
 	            	<div class="form-group text-center">

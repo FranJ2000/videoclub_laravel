@@ -25,13 +25,28 @@
 			@if( $id->rented == false )
 				<p><b>Estado: </b>Pelicula disponible</p>
 				<br>
-				<button class="btn btn-success">Alquilar película</button>
+				<!--<button class="btn btn-success">Alquilar película</button>-->
+				<form action="{{action('CatalogController@putRent', $id->id)}}" method="POST">
+					{{ method_field('PUT') }}
+					{{ csrf_field() }}
+					<button type="submit" class="btn btn-success">Alquilar película</button>
+				</form>
 			@else
 				<p><b>Estado: </b>Pelicula actualmente alquilada</p>
 				<br>
-				<button class="btn btn-danger">Devolver película</button>
+				<!--<button class="btn btn-danger">Devolver película</button>-->
+				<form action="{{action('CatalogController@putReturn', $id->id)}}" method="POST">
+					{{ method_field('PUT') }}
+					{{ csrf_field() }}
+					<button type="submit" class="btn btn-danger">Devolver película</button>
+				</form>
 			@endif
 			<a href="/catalog/edit/{{ $id->id }}"><button class="btn btn-warning">Editar pelicula</button></a>
+			<form action="{{action('CatalogController@deleteMovie', $id->id)}}" method="POST">
+				{{ method_field('DELETE') }}
+				{{ csrf_field() }}
+				<button type="submit" class="btn btn-danger">Eliminar película</button>
+			</form>
 			<a href="/catalog/"><button class="btn btn-withe">Volver al listado</button></a>
 		</div>
 	</div>	
