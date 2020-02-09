@@ -203,11 +203,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'francisco',
             'email' => 'franj00821@gmail.com',
             'password' => bcrypt('Usu4r!o1234'),
+            'is_admin' => false,
         ]);
         DB::table('users')->insert([
             'name' => 'administrador',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('Supr3m04dmIn'),
+            'is_admin' => true,
         ]);
     }
 }

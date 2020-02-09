@@ -15,11 +15,13 @@
                             {{ __('Catalog') }}
                         </a>
                     </li>
-                    <li class="nav-item {{  Request::is(app()->getLocale().'/catalog/create') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{url(app()->getLocale().'/catalog/create')}}">
-                            <span>&#10010</span> {{ __('Add Film') }}
-                        </a>
-                    </li>
+                    @if(Auth::user()->is_admin)
+                        <li class="nav-item {{  Request::is(app()->getLocale().'/catalog/create') ? 'active' : ''}}">
+                            <a class="nav-link" href="{{urldecode(url(app()->getLocale().'/catalog/create'))}}">
+                                <span>&#10010</span> {{ __('Add Film') }}
+                            </a>
+                        </li>
+                    @endif
                 </ul>
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item dropdown">
@@ -28,14 +30,14 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         
                         @if(Request::segment(3) == '')
-                            <a class="dropdown-item" href="{{ url('en',Request::segment(2)) }}">{{ __('English') }}</a>
-                            <a class="dropdown-item" href="{{ url('es',Request::segment(2)) }}">{{ __('Spanish') }}</a>
+                            <a class="dropdown-item" href="{{ urldecode(url('en',Request::segment(2))) }}">{{ __('English') }}</a>
+                            <a class="dropdown-item" href="{{ urldecode(url('es',Request::segment(2))) }}">{{ __('Spanish') }}</a>
                         @elseif(Request::segment(4) == '')
-                            <a class="dropdown-item" href="{{ url('en',Request::segment(2).'/'.Request::segment(3)) }}">{{ __('English') }}</a>
-                            <a class="dropdown-item" href="{{ url('es',Request::segment(2).'/'.Request::segment(3)) }}">{{ __('Spanish') }}</a>
+                            <a class="dropdown-item" href="{{ urldecode(url('en',Request::segment(2).'/'.Request::segment(3))) }}">{{ __('English') }}</a>
+                            <a class="dropdown-item" href="{{ urldecode(url('es',Request::segment(2).'/'.Request::segment(3))) }}">{{ __('Spanish') }}</a>
                         @elseif(Request::segment(5) == '')
-                            <a class="dropdown-item" href="{{ url('en',Request::segment(2).'/'.Request::segment(3).'/'.Request::segment(4)) }}">{{ __('English') }}</a>
-                            <a class="dropdown-item" href="{{ url('es',Request::segment(2).'/'.Request::segment(3).'/'.Request::segment(4)) }}">{{ __('Spanish') }}</a>
+                            <a class="dropdown-item" href="{{ urldecode(url('en',Request::segment(2).'/'.Request::segment(3).'/'.Request::segment(4))) }}">{{ __('English') }}</a>
+                            <a class="dropdown-item" href="{{ urldecode(url('es',Request::segment(2).'/'.Request::segment(3).'/'.Request::segment(4))) }}">{{ __('Spanish') }}</a>
                         @endif
                         </div>
                     </li>

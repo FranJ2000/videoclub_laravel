@@ -41,13 +41,15 @@
 					<button type="submit" class="btn btn-danger">{{ __('Return movie') }}</button>
 				</form>
 			@endif
-			<a href="{{ url(app()->getLocale().'/catalog/edit/'.$id->id) }}"><button class="btn btn-warning">{{ __('Edit movie') }}</button></a>
-			<!--<a href="/catalog/edit/{{ $id->id }}"><button class="btn btn-warning">{{ __('Edit movie') }}</button></a>-->
-			<form action="{{action('CatalogController@deleteMovie', $id->id)}}" method="POST">
-				{{ method_field('DELETE') }}
-				{{ csrf_field() }}
-				<button type="submit" class="btn btn-danger">{{ __('Remove movie') }}</button>
-			</form>
+			@if(Auth::user()->is_admin)
+				<a href="{{ url(app()->getLocale().'/catalog/edit/'.$id->id) }}"><button class="btn btn-warning">{{ __('Edit movie') }}</button></a>
+				<!--<a href="/catalog/edit/{{ $id->id }}"><button class="btn btn-warning">{{ __('Edit movie') }}</button></a>-->
+				<form action="{{action('CatalogController@deleteMovie', $id->id)}}" method="POST">
+					{{ method_field('DELETE') }}
+					{{ csrf_field() }}
+					<button type="submit" class="btn btn-danger">{{ __('Remove movie') }}</button>
+				</form>
+			@endif
 			<a href=" {{url(app()->getLocale().'/catalog') }}"><button class="btn btn-withe">{{ __('Return to the catalog') }}</button></a>
 		</div>
 	</div>	
