@@ -1,5 +1,5 @@
 @extends('layouts.master')
 
 @section('content')
-	Pantalla principal
+	Pantalla principal de sesión
 @stop

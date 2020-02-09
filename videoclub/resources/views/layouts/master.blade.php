@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Videoclub</title>
   </head>
   <body>
     @include('partials.navbar')

@@ -15,8 +15,8 @@ class CatalogController extends Controller
     	return view('catalog.index', ['arrayPeliculas'=>$movies]);
     }
 
-    function getShow($id) 
-    {   
+    function getShow($language,$id) 
+    {   //getShow recibe dos parametros: idioma, id. Nos interesa $id.
         $movies = DB::table('movies')->find($id);
     	return view('catalog.show', array('id'=>$movies));
     }
@@ -26,7 +26,7 @@ class CatalogController extends Controller
     	return view('catalog.create');
     }
 
-    function getEdit($id)
+    function getEdit($language,$id)
     {
         $movies = DB::table('movies')->find($id);
     	return view('catalog.edit', array('id'=>$movies));
@@ -40,9 +40,9 @@ class CatalogController extends Controller
             'poster' => 'required',
             'synopsis' => 'required'
         ]);
-        $id = Movie::create($validarDatos); 
-        session()->flash('notif', 'La película se ha insertado correctamente.');  
-        return redirect('catalog');
+        Movie::create($validarDatos); 
+        session()->flash('notif', 'The movie has been inserted correctly.');  
+        return redirect(app()->getLocale().'/catalog');
     }
 
     function putEdit(Request $request, $id)
@@ -55,27 +55,27 @@ class CatalogController extends Controller
             'synopsis' => 'required'
         ]);
         Movie::whereId($id)->update($validarDatos);
-        session()->flash('notif', 'La película se ha guardado/modificado correctamente.');
-        return redirect('catalog/show/'.$id);
+        session()->flash('notif', 'The movie has been saved / modified successfully.');
+        return redirect('en/catalog/show/'.$id);
     }
 
     function putRent(Request $request, $id) {
         Movie::whereId($id)->update([
             'rented' => true]);
-        session()->flash('notif', 'La película se ha alquilado correctamente.');
-        return redirect('catalog/show/'.$id);
+        session()->flash('notif', 'The movie has been rented correctly.');
+        return redirect('en/catalog/show/'.$id);
     }
 
     function putReturn(Request $request, $id) {
         Movie::whereId($id)->update([
             'rented' => false]);
-        session()->flash('notif', 'La película se ha devuelto correctamente.');
-        return redirect('catalog/show/'.$id);
+        session()->flash('notif', 'The movie has been returned successfully.');
+        return redirect('en/catalog/show/'.$id);
     }
 
     function deleteMovie(Request $request, $id) {
         Movie::whereId($id)->delete();
-        session()->flash('notif', 'La película se ha eliminado correctamente.');
-        return redirect('catalog');
+        session()->flash('notif', 'The movie has been successfully deleted.');
+        return redirect('en/catalog');
     }
 }

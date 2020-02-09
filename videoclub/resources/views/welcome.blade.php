@@ -48,7 +48,7 @@
                 font-size: 84px;
             }
 
-            .links > a {
+            .links > a, .descipcion > a {
                 color: #636b6f;
                 padding: 0 25px;
                 font-size: 13px;
@@ -61,6 +61,11 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            a.boton {
+                background-color: #DEB887;
+                padding: 10px;
+            }
         </style>
     </head>
     <body>
@@ -68,12 +73,12 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url(app()->getLocale(),'home') }}">{{ __('Home') }}</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login', app()->getLocale()) }}">{{ __('Login') }}</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register', app()->getLocale()) }}">{{ __('Register') }}</a>
                         @endif
                     @endauth
                 </div>
@@ -81,18 +86,16 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Videoclub
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="descipcion">
+                    <p>{{ __('Made by') }} <b>Francisco Javier Rodríguez Sánchez</b></p>
+                    <br>
+                    <div class="links">
+                        <a href="https://github.com/FranJ2000/videoclub_laravel" class="boton">Github</a>
+                        <a href="https://laravel.com/docs/6.x" class="boton">{{ __('Documentation') }}</a>
+                    </div>
                 </div>
             </div>
         </div>

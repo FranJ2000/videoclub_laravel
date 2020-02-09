@@ -11,33 +11,29 @@
 |
 */
 
-Route::get('/', 'HomeController@getHome');
+Route::redirect('/', app()->getLocale().'/index');
 
-/*Route::get('login', function() {
-	return view('auth.login');
+Route::group(['prefix' => '{language}'], function() {
+	//Página principal
+	Route::get('index', function() {
+		return view('welcome');
+	});
+	//Cuando inicias sesión redirige aqui. Mirar LoginController
+	Route::get('home', 'HomeController@index')->middleware('auth'); 
+	Auth::routes(); //Habilita acceso a /{es|en}/{login|register|...}
+
+	Route::get('catalog', 'CatalogController@getIndex')->middleware('auth');
+	Route::get('catalog/create', 'CatalogController@getCreate')->middleware('auth');
+	Route::post('catalog/create', 'CatalogController@postCreate')->middleware('auth');
+	Route::get('catalog/show/{id}', 'CatalogController@getShow')->middleware('auth');	
+	Route::get('catalog/edit/{id}', 'CatalogController@getEdit')->middleware('auth');
 });
 
-Route::get('logout', function() {
-	return view('auth.login');
-});*/
-
+// Edit, Rent, Return y delete al ser de tipo put o delete no acepta el prefijo de idioma. Los valores se devolveran por defecto en inglés.
 Route::group(['middleware' => 'auth'], function() {
-	Route::get('catalog', 'CatalogController@getIndex');
-
-	Route::get('catalog/show/{id}', 'CatalogController@getShow');
-
-	Route::get('catalog/create', 'CatalogController@getCreate');
-
-	Route::get('catalog/edit/{id}', 'CatalogController@getEdit');
-
-	Route::post('catalog/create', 'CatalogController@postCreate');
-
 	Route::put('catalog/edit/{id}', 'CatalogController@putEdit');
 	Route::put('catalog/rent/{id}', 'CatalogController@putRent');
 	Route::put('catalog/return/{id}', 'CatalogController@putReturn');
 	Route::delete('catalog/delete/{id}', 'CatalogController@deleteMovie');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
